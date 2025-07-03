@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Turtle vs Hare</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/style.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.min.js"></script>
+    <script src="/GameObject.js"></script>
+    <!--     <script src="/Tortoise.js"></script>
+    <script src="/Hare.js"></script> -->
+
+    <script src="/Camera.js"></script>
+    <!--     <script src="/PlayerControls.js"></script> -->
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <script
+      src="https://apis.google.com/js/platform.js?onload=onLoad"
+      async
+      defer
+    ></script>
+    <meta
+      name="google-signin-client_id"
+      content="88713995697-nii4pt4khb53arcbqud3gv5evkound65.apps.googleusercontent.com"
+    />
+
+    <script src="/script.js" defer></script>
+    <script src="/client.js" defer></script>
+  </head>
+  <body>
+    <div class="container-fluid pl-0 pr-0">
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark w-100">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Turtle Vs Hare</a>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <!-- Links -->
+          <ul class="navbar-nav  ml-auto">
+            <li class="nav-item">
+              <span id="serverMessageDisplay1" class="nav-link"> </span>
+            </li>
+
+            <li class="nav-item">
+              <span id="playerMoneyDisplay1" class="nav-link" href=""> </span>
+            </li>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbardrop"
+                data-toggle="dropdown"
+              >
+                <%= user.name %>
+                <img
+                  id="profilePic"
+                  src="<%= user.picture %>"
+                  alt="profile picture"
+                />
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" onclick="signOut();"
+                  >Sign Out</a
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Toggler/collapsibe Button -->
+        <button
+          class="navbar-toggler ml-auto"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapsibleNavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </nav>
+      <!--       <div class="box"> -->
+      <!-- The Host Modal -->
+      <!-- The Modal -->
+      <div class="modal" id="hostModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+              <h4>HOST</h4>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body text-center">
+              Is everyone ready?<br>
+              <button type="button" class="btn btn-primary" onclick="hostStartGame();">START GAME</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- The Betting Modal -->
+      <div class="modal fade" id="bettingModal">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header d-none d-lg-block">
+              <h4 class="modal-title">BET!</h4>
+              <!--             <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>-->
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              <p>
+                Place your BET! You have $<span id="playerMoneyDisplay2"
+                  >150</span
+                >. <span id="serverMessageDisplay2"></span>
+              </p>
+              <div id="accordion">
+                <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                      <button
+                        class="btn btn-link collapsed"
+                        data-toggle="collapse"
+                        data-target="#collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="collapseTwo"
+                      >
+                        BIG MONEY
+                      </button>
+                    </h5>
+                  </div>
+                  <div
+                    id="collapseTwo"
+                    class="collapse"
+                    aria-labelledby="headingTwo"
+                    data-parent="#accordion"
+                  >
+                    <div class="card-body">
+                      <p>
+                        Bet $<select id="yourWagerDropdown2">
+                          <option>10</option>
+                          <option>25</option>
+                          <option>50</option>
+                          <option>100</option>
+                        </select>
+                        on
+                        <select id="racerSelectDropdown"> </select>
+                        and win <b>x5</b>!
+                      </p>
+
+                      <button
+                        type="button"
+                        class="btn btn-warning"
+                        onclick="betBig()"
+                      >
+                        Place Bet
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                      <button
+                        class="btn btn-link"
+                        data-toggle="collapse"
+                        data-target="#collapseOne"
+                        aria-expanded="true"
+                        aria-controls="collapseOne"
+                      >
+                        EASY MONEY
+                      </button>
+                    </h5>
+                  </div>
+
+                  <div
+                    id="collapseOne"
+                    class="collapse"
+                    aria-labelledby="headingOne"
+                    data-parent="#accordion"
+                  >
+                    <div class="card-body">
+                      <p>
+                        Bet $<select id="yourWagerDropdown1">
+                          <option>10</option>
+                          <option>25</option>
+                          <option>50</option>
+                          <option>100</option>
+                        </select>
+                        win <b>x2</b>
+                      </p>
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        onclick="betEasy('Turtle')"
+                      >
+                        Turtle</button
+                      >&nbsp;<button
+                        type="button"
+                        class="btn btn-danger"
+                        onclick="betEasy('Hare')"
+                      >
+                        Hare
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer d-none d-lg-block">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-dark ml-auto"
+                data-dismiss="modal"
+              >No Bet
+              
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--       </div> -->
+      <div class="container-fluid fixed-bottom pr-2">
+        <div
+          id="greenAlert"
+          class="alert alert-success show fade w-25 float-right"
+          role="alert"
+        >
+          + $500
+        </div>
+        <div
+          id="redAlert"
+          class="alert alert-danger show fade w-25 float-right"
+          role="alert"
+        >
+          - $500
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function() {
+          console.log("User signed out.");
+          location.assign("/login");
+        });
+      }
+      function onLoad() {
+        gapi.load("auth2", function() {
+          gapi.auth2.init();
+        });
+      }
+    </script>
+  </body>
+</html>

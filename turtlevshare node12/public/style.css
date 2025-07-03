@@ -1,0 +1,82 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vw;
+  width: 100vw;
+  overflow: hidden;
+  /*border:1px solid red;*/
+  background-color: rgb(220, 220, 220);
+}
+.abcRioButton{
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  background-color: #0D6AE8;
+}
+canvas {
+  /* remove scrollbars */
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  height:100vw;
+  width:100vw;
+  z-index:0;
+}
+
+canvas:focus {
+  /* remove blue outline around canvas */
+  outline: 0;
+}
+
+.hud {
+  color: rgb(128,128,128);
+  background-color: transparent;
+  z-index: 99;
+  padding:10px; 
+}
+
+img#profilePic{
+  height:19px;
+  border-radius:50%;
+}
+/* .modal {
+   position: absolute !important;
+   top: 10px;
+   right: 10px;
+   bottom: 0;
+   left: 0;
+   z-index: 10040;
+   overflow: auto;
+   overflow-y: auto;
+} */
+.modal-backdrop
+{
+    opacity:0.2 !important;
+}
+#bettingModal .modal-dialog{
+   position: fixed !important;
+   top: 5px;
+   right: 0px;
+/*    margin-right:1.75rem !important; */
+   margin:1.5rem !important; 
+}
+
+/*    bottom: 0;
+   left: 0;
+   z-index: 10040;
+   overflow: auto;
+   overflow-y: auto; */
+/* } */
+nav{
+  z-index:100;
+}
+.responsiveText{
+  font-size::1vw;
+}

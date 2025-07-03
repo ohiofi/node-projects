@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A cool thing made with Glitch">
+
+    <title>Turtle vs Hare Login</title>
+
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- import the webpage's client-side javascript file -->
+<!--     <script src="/script.js" defer></script> -->
+    
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="88713995697-nii4pt4khb53arcbqud3gv5evkound65.apps.googleusercontent.com">
+  </head>
+  <body>
+    <div class="container">
+      <div class="card mx-auto shadow-lg p-5 m-5 bg-white">
+        <div class="card-header bg-white text-center">
+          <h1>
+            Turtle vs Hare
+          </h1>
+        </div>
+        <div class="card-body bg-white text-center">
+          <p>
+            Login
+          </p>
+          <div class="g-signin2 mx-auto" data-onsuccess="onSignIn"></div>
+          
+        </div>
+        <div class="card-footer bg-white text-right"><a href="#" onclick="signOut();" class="small text-muted">Sign out</a></div>
+      </div>
+    
+      
+      
+      
+    </div>
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+      }
+    </script>
+    <script>
+      function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        localStorage.setItem("username", profile.getName());
+        // socket = io.connect();
+        // socket.emit('setUsername', profile.getName());
+        var id_token = googleUser.getAuthResponse().id_token;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/login');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+          
+          console.log('Sign in ' + xhr.responseText);
+          if(xhr.responseText == "success"){
+            signOut();
+            location.assign('/game');
+          }
+        };
+        xhr.send(JSON.stringify({token: id_token}));
+  
+      }
+    </script>
+  </body>
+</html>
