@@ -66,7 +66,7 @@ let scoreboard = {
 };
 function preload() {
   myFont = loadFont(
-    "https://cdn.glitch.com/a505537e-e31c-44b7-a7d0-3f1df6037202%2FPressStart2P.ttf?v=1582643146331"
+    "./PressStart2P.ttf"
   );
   // shell = loadImage(
   //   "https://cdn.glitch.com/af6937ef-c502-4da1-9b5c-a6f459aabd0f%2Fturtle%20shell.jpg?v=1618927590685"
