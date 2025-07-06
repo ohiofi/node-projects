@@ -1,0 +1,32 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>p5.js</title>
+    <meta name="description" content="p5.js on Glitch">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/p5.min.js"></script> 
+    <script src="/p5.dom.js"></script>
+    <script src="/p5.sound.js"></script>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+  </head>
+  <body onload="showe()">
+    <form style="" onclick="blackDot()">
+      <input type="color" id="userColor" onclick="blackDot()" value="#ff0000" style="">
+      <button type="button" onclick="setPenRandom()">Random</button>
+      <button type="button" id="ebutton" onclick="whiteout()">Erase</button><button type="button" style="display:none;" id="obutton" onclick="oof()">Erase</button>
+    </form>
+<!--     <center> -->
+      <div id="canvasContainer" onmouseup="mouseUp()"></div>
+<!--     </center> -->
+<!--     <div class="glitchButton" style="position:fixed;top:20px;right:20px;opacity:0.2;"></div>  
+    <script src="https://button.glitch.me/button.js" data-style="glitch"></script> -->
+    
+    
+  </body>
+  <script src="/line.js"></script>
+  <script src="/client.js"></script>
+</html>

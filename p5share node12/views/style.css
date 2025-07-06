@@ -1,0 +1,43 @@
+
+      html, body {
+  height: 100%;
+  overflow: hidden;
+  background-color:gray;
+}
+      form{
+        font-family:sans-serif;
+        border-radius:15px;
+        opacity:1;
+/*         position:fixed;
+        top:20px;
+        left:20px; */
+        line-height:12px;
+        width:100px;
+        background-color:rgba(245,245,245,1);
+        padding:5px;
+        text-align:center;
+        vertical-align:middle;
+        border:1px solid black;
+      }
+      button{
+        margin:0px auto;
+      }
+div{
+  border:1px solid black;
+  background-color:white;
+  border-radius:15px;
+}
+      /*input[type="color"] {
+        -webkit-appearance: none;
+        border: none;
+        width: 12px;
+        height: 12px;
+        border-radius:50%;
+      }
+      input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 0;
+      }
+      input[type="color"]::-webkit-color-swatch {
+        border: none;
+        border-radius:50%;
+      }*/

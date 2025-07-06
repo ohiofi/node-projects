@@ -6,7 +6,9 @@ var scoreboard = {}; // key is username, value is {"score":0,"questionNumber":0}
 var clientScoreboard = {};
 var fs = require("fs");
 console.log(typeof process.env.BLACKLIST);
-const BLACKLIST = process.env.BLACKLIST.split(",");
+
+let BLACKLIST;
+if(process.env.BLACKLIST != null) BLACKLIST = process.env.BLACKLIST.split(",");
 
 // on server reset load from scores.json
 fs.readFile("scores.json", function(err, data) {
